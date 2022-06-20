@@ -15,13 +15,13 @@ if len(min) > len(max):
     min = max
     max = temp
 file_output = ''
-temp = 0
 while not (len(max) == len(min)):
-    file_output += max[temp] + ' + '
+    file_output += max[0] + ' + '
     max.pop(0)
 if max[0].__contains__('x^'):
-    for i in range(0, int(max[0].split('x^')[1]) - 2):
-        file_output += str(int(max[0].split('x^')[0]) + int(min[0].split('x^')[0])) + 'x^' + str(len(max) - i - 1) + ' + '
+    temp1 = int(max[0].split('x^')[1])
+    for i in range(0, temp1 - 1):
+        file_output += str(int(max[0].split('x^')[0]) + int(min[0].split('x^')[0])) + 'x^' + str(len(max) - 1) + ' + '
         max.pop(0)
         min.pop(0)
 if max[0].__contains__('x'):
