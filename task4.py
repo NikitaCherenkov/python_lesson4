@@ -11,5 +11,6 @@ for i in range(0, rate):
     if not i == rate - 1:
         form += str(random.randint(0, 100)) + 'x^' + str((rate - i)) + ' + '
     else:
-        form += str(random.randint(0, 100)) + 'x + ' + str(random.randint(0, 100)) + ' = 0'
+        form += str(random.randint(0, 100)) + 'x + '
+form += str(random.randint(0, 100)) + ' = 0'
 file.write(form + '\n')

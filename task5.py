@@ -8,7 +8,6 @@ def read_file(file_name):
 
 file0_name = input('Введите название первого файла: ')
 file1_name = input('Введите название второго файла: ')
-file_output_name = input('Введите название файла с суммой многочленов, который будет создан: ')
 min = read_file(file0_name).split(' + ')
 max = read_file(file1_name).split(' + ')
 if len(min) > len(max):
@@ -20,19 +19,16 @@ temp = 0
 while not (len(max) == len(min)):
     file_output += max[temp] + ' + '
     max.pop(0)
-for i in range(0, len(max)):
-    for j in range(0, len(min)):
-        if max[i].__contains__('x^') and min[j].__contains__('x^'):
-            if int(max[i].split('x^')[1]) > int(min[j].split('x^')[1]):
-                file_output += max[i] + ' + '
-                break
-            if int(max[i].split('x^')[1]) == int(min[j].split('x^')[1]):
-                file_output += str(int(max[i].split('x^')[0]) + int(min[j].split('x^')[0])) + 'x^' + str(i + 1) + ' + '
-                break
-        if max[i].__contains__('x') and min[j].__contains__('x') and not max[i].__contains__('^') and not min[j].__contains__('^'):
-            file_output += str(int(max[i].split('x')[0]) + int(min[j].split('x')[0])) + 'x + '
-            break
-        if max[i].__contains__('=') and min[j].__contains__('='):
-            file_output += str(int(max[i].split(' = ')[0]) + int(min[j].split(' = ')[0])) + ' = 0'
-            break
-print(file_output)
+if max[0].__contains__('x^'):
+    for i in range(0, int(max[0].split('x^')[1]) - 2):
+        file_output += str(int(max[0].split('x^')[0]) + int(min[0].split('x^')[0])) + 'x^' + str(len(max) - i - 1) + ' + '
+        max.pop(0)
+        min.pop(0)
+if max[0].__contains__('x'):
+    file_output += str(int(max[0].split('x')[0]) + int(min[0].split('x')[0])) + 'x + '
+    max.pop(0)
+    min.pop(0)
+file_output += str(int(max[0].split(' = ')[0]) + int(min[0].split(' = ')[0])) + ' = 0'
+file_output_name = input('Введите название файла с суммой многочленов, который будет создан: ')
+file = open(file_output_name, 'w')
+file.write(file_output + '\n')
